@@ -13,6 +13,8 @@
         >{{ option }}</option>
       </select>
 
+      <BaseSelect label="Select a category" :options="categories" v-model="event.category"/>
+
       <h3>Name & describe your event</h3>
 
       <BaseInput label="Title" type="text" v-model="event.title"/>
@@ -24,44 +26,12 @@
       <BaseInput label="Location" type="text" v-model="event.location"/>
 
       <h3>Are pets allowed?</h3>
-      <div>
-        <input
-            type="radio"
-            v-model="event.pets"
-            :value="1"
-            name="pets"
-          />
-        <label>Yes</label>
-      </div>
 
-      <div>
-        <input
-          type="radio"
-          v-model="event.pets"
-          :value="0"
-          name="pets"
-        />
-        <label>No</label>
-      </div>
-
+      <BaseRadioGroup vertical name="pets" :options="petOptions" v-model="event.pets" />
       <h3>Extras</h3>
-      <div>
-        <input
-          type="checkbox"
-          v-model="event.extras.catering"
-          class="field"
-        />
-        <label>Catering</label>
-      </div>
 
-      <div>
-        <input
-          type="checkbox"
-          v-model="event.extras.music"
-          class="field"
-        />
-        <label>Live music</label>
-      </div>
+      <BaseCheckbox label="Catering" v-model="event.extras.catering"/>
+      <BaseCheckbox label="Live music" v-model="event.extras.music"/>
 
       <button class="button -fill-gradient" type="submit">Submit</button>
     </form>
@@ -80,6 +50,10 @@ export default {
         'education',
         'food',
         'community'
+      ],
+      petOptions: [
+        { label: 'Yes', value: '1' },
+        { label: 'No', value: '0' }
       ],
       event: {
         category: '',
