@@ -1,35 +1,21 @@
 <template>
   <div>
     <h1>Create an event</h1>
-    <form>
-
-      <label>Select a category</label>
-      <select v-model="event.category">
-        <option
-          v-for="option in categories"
-          :value="option"
-          :key="option"
-          :selected="option === event.category"
-        >{{ option }}</option>
-      </select>
+    <form @submit.prevent="onSubmit">
 
       <BaseSelect label="Select a category" :options="categories" v-model="event.category"/>
 
       <h3>Name & describe your event</h3>
-
       <BaseInput label="Title" type="text" v-model="event.title"/>
-
       <BaseInput label="Description" type="text" v-model="event.description"/>
 
       <h3>Where is your event?</h3>
-
       <BaseInput label="Location" type="text" v-model="event.location"/>
 
       <h3>Are pets allowed?</h3>
+      <BaseRadioGroup vertical name="pets" :options="petOptions" v-model="event.pets"/>
 
-      <BaseRadioGroup vertical name="pets" :options="petOptions" v-model="event.pets" />
       <h3>Extras</h3>
-
       <BaseCheckbox label="Catering" v-model="event.extras.catering"/>
       <BaseCheckbox label="Live music" v-model="event.extras.music"/>
 
@@ -39,6 +25,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   data () {
     return {
@@ -66,6 +54,13 @@ export default {
           music: false
         }
       }
+    }
+  },
+  methods: {
+    onSubmit () {
+      axios.post('http://localhost:3000/event', this.event)
+        .then((response) => console.log(response))
+        .catch((err) => console.log(err))
     }
   }
 }

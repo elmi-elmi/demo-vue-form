@@ -1,0 +1,28 @@
+{
+  "event": [
+    {
+      "category": "housing",
+      "title": "",
+      "description": "",
+      "location": "ads",
+      "pets": "1",
+      "extras": {
+        "catering": true,
+        "music": false
+      },
+      "id": 1
+    },
+    {
+      "category": "food",
+      "title": "asd",
+      "description": "",
+      "location": "",
+      "pets": 1,
+      "extras": {
+        "catering": false,
+        "music": false
+      },
+      "id": 2
+    }
+  ]
+}
